@@ -42,7 +42,7 @@ def key_generation(key):
     P8 = [6, 3, 7, 4, 8, 5, 10, 9]
     K1 = [0 for i in range(8)]
     for i in range(8):
-        K1[i] = circular_shift[P8[i] - 1]
+        K1[i] = int(circular_shift[P8[i] - 1])
 
     # Separa a chave em duas partes e faz um deslocamento circular duplo
     first_half = circular_shift[:5]
@@ -57,11 +57,24 @@ def key_generation(key):
     # Seleciona 8 bits e faz uma permutação
     K2 = [0 for i in range(8)]
     for i in range(8):
-        K2[i] = circular_shift[P8[i] - 1]
+        K2[i] = int(circular_shift[P8[i] - 1])
 
     return K1, K2
 
 ### Função F do Feistel ###
+def f_function(L, R, key):
+    expansion_permutation = [[4, 1, 2, 3], 
+                             [2, 3, 4, 1]]
+    
+    # Expansão/Permutação de R e XOR com a chave
+    matrix = [[0] * 4 for _ in range(2)]
+    for i in range(2):
+        for j in range(4):
+            matrix[i][j] = int(bool(R[expansion_permutation[i][j] - 1]) ^ bool(key[i + j]))
+
+    print(matrix)
+
+            
 
 
 def s_des(key, block):
@@ -72,7 +85,17 @@ def s_des(key, block):
     IP = [2, 6, 3, 1, 4, 8, 5, 7]
     first_permutation = [0 for i in range(8)]
     for i in range(8):
-        first_permutation[i] = block[IP[i] - 1]
+        first_permutation[i] = int(block[IP[i] - 1])
+
+    # Divisão do bloco de texto em duas partes
+    L0 = block[:4]
+    R0 = block[4:]
+    f_function(L0, R0, K1)
+
+    
+    IP_1 = [4, 1, 3, 5, 7, 2, 8, 6]
+    for i in range(8):
+        print(first_permutation[IP_1[i] - 1], end="")
 
     
 
