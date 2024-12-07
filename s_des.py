@@ -74,8 +74,6 @@ def f_function(L, R, key):
         for j in range(4):
             matrix[i][j] = int(bool(int(R[expansion_permutation[i][j] - 1])) ^ bool(key[(4 * i) + j]))
 
-    print("Matriz de expansão/permutação: ", matrix, sep="")
-
     # S-Boxes
     S0 = [[1, 0, 3, 2],
           [3, 2, 1, 0],
@@ -116,8 +114,6 @@ def f_function(L, R, key):
         final_res[i] = str(int(bool(int(L[i])) ^ bool(int(final_permutation[i]))))
 
 
-    # print("Resultado da função F: ", final_res, sep="")
-
     # Retorna o lado esquerdo e direito, respectivamente
     return final_res, R
             
@@ -142,8 +138,6 @@ def s_des(key, block):
     L1, R1 = f_function(L0, R0, K1)
 
     L2, R2 = f_function(L1, R1, K2)
-
-    print(L2 + R2)   
     final_block = L2 + R2
 
     # Permutação Final    
@@ -153,6 +147,7 @@ def s_des(key, block):
         IP_1_permutation[i] = final_block[IP_1[i] - 1]
 
     IP_1_permutation = "".join(IP_1_permutation)
+    
     print("Bloco de texto encriptado: ", IP_1_permutation, sep="")
     
 
