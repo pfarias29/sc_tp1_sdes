@@ -146,14 +146,12 @@ def s_des(key, block):
     for i in range(8):
         IP_1_permutation[i] = final_block[IP_1[i] - 1]
 
-    IP_1_permutation = "".join(IP_1_permutation)
-    
-    print("Bloco de texto encriptado: ", IP_1_permutation, sep="")
-    
+    IP_1_permutation = "".join(IP_1_permutation)    
 
-    return 0
+    return IP_1_permutation
 
 if __name__ == "__main__":
     key = "1010000010"
     block = "11010111"
-    s_des(key, block)
+    
+    print("Bloco de texto encriptado: ", (s_des(key, block)), sep="")
