@@ -1,4 +1,3 @@
-
 ### Função de encriptação S-DES ###
 # Parâmetros: chave (key) e bloco de texto (block)
 # Retorno: bloco de texto encriptado
@@ -117,6 +116,7 @@ def f_function(L, R, key):
     # Retorna o lado esquerdo e direito, respectivamente
     return final_res, R
             
+### Função de decriptação do S-DES ###
 def decriptition_s_des(key, block):
     K1, K2 = key_generation(key)
     block = list(block)
@@ -148,6 +148,7 @@ def decriptition_s_des(key, block):
 
     return IP_1_permutation
 
+### Função de encriptação do S-DES ###
 def s_des(key, block):
     K1, K2 = key_generation(key)
     block = list(block)
