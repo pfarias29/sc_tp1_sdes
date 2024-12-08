@@ -117,7 +117,36 @@ def f_function(L, R, key):
     # Retorna o lado esquerdo e direito, respectivamente
     return final_res, R
             
+def decriptition_s_des(key, block):
+    K1, K2 = key_generation(key)
+    block = list(block)
 
+    # Permutação Inicial
+    IP = [2, 6, 3, 1, 4, 8, 5, 7]
+    first_permutation = [0 for _ in range(8)]
+    for i in range(8):
+        first_permutation[i] = block[IP[i] - 1]
+
+    first_permutation = "".join(first_permutation)
+
+
+    # Divisão do bloco de texto em duas partes
+    L0 = list(first_permutation[:4])
+    R0 = list(first_permutation[4:])
+    L1, R1 = f_function(L0, R0, K2)
+
+    L2, R2 = f_function(L1, R1, K1)
+    final_block = L2 + R2
+
+    # Permutação Final    
+    IP_1 = [4, 1, 3, 5, 7, 2, 8, 6]
+    IP_1_permutation = [0 for i in range(8)]   
+    for i in range(8):
+        IP_1_permutation[i] = final_block[IP_1[i] - 1]
+
+    IP_1_permutation = "".join(IP_1_permutation)    
+
+    return IP_1_permutation
 
 def s_des(key, block):
     K1, K2 = key_generation(key)
@@ -153,5 +182,15 @@ def s_des(key, block):
 if __name__ == "__main__":
     key = "1010000010"
     block = "11010111"
-    
-    print("Bloco de texto encriptado: ", (s_des(key, block)), sep="")
+    ciphered_block = s_des(key, block)
+    deciphered_block = decriptition_s_des(key, ciphered_block)
+
+    # Teste de encriptação
+    print("### Teste do S-DES ###")
+    print("Passou" if ciphered_block == "10010111" else "Falhou")
+    print("Resultado: ", ciphered_block)
+
+    # Teste de decriptação
+    print("### Teste de decriptação do S-DES ###")
+    print("Passou" if deciphered_block == block else "Falhou")
+    print("Resultado: ", deciphered_block)
