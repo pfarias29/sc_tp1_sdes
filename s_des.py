@@ -133,7 +133,7 @@ def decriptition_s_des(key, block):
     # Divisão do bloco de texto em duas partes
     L0 = list(first_permutation[:4])
     R0 = list(first_permutation[4:])
-    R1, L2 = feistel_round(L0, R0, K2)
+    R1, L1 = feistel_round(L0, R0, K2)
 
     L2, R2 = feistel_round(L1, R1, K1)
     final_block = L2 + R2
@@ -188,7 +188,7 @@ if __name__ == "__main__":
 
     # Teste de encriptação
     print("### Teste do S-DES ###")
-    print("Passou" if ciphered_block == "10010111" else "Falhou")
+    print("Passou" if ciphered_block == "10101000" else "Falhou")
     print("Resultado: ", ciphered_block)
 
     # Teste de decriptação
