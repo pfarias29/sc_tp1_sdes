@@ -133,7 +133,7 @@ def decriptition_s_des(key, block):
     # Divisão do bloco de texto em duas partes
     L0 = list(first_permutation[:4])
     R0 = list(first_permutation[4:])
-    L1, R1 = feistel_round(L0, R0, K2)
+    R1, L2 = feistel_round(L0, R0, K2)
 
     L2, R2 = feistel_round(L1, R1, K1)
     final_block = L2 + R2
@@ -165,7 +165,7 @@ def s_des(key, block):
     # Divisão do bloco de texto em duas partes
     L0 = list(first_permutation[:4])
     R0 = list(first_permutation[4:])
-    L1, R1 = feistel_round(L0, R0, K1)
+    R1, L1 = feistel_round(L0, R0, K1)
 
     L2, R2 = feistel_round(L1, R1, K2)
     final_block = L2 + R2
